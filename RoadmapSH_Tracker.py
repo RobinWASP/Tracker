@@ -8,7 +8,7 @@
 # I could implement a Dictionary of the user's choices but I'm not sure on how to implement it cleanly
 
 # Don't forget to print this after all the magic :D
-task = [] 
+task = []
 complete_task = []
 # pending_task = []
 in_prog_task = [] # In progress #TODO: 1 task can only be done, 2 tasks cannot be done simultaneously!
@@ -20,16 +20,39 @@ task.append(user_add_task)
 print("Task has been ADDED SUCCESSFULLY")
 
 def add_task():
-    while (len(task) <= task_amount):
-        user_ask = input("Would you like to add again? (y / n)? ").lower()
-        if(user_ask == "y"):
-            user_add_task = input("Please input another task: ")
+    while True:
+        user_add_task = input("Would you like to add some tasks? ")
+        if(user_add_task == "y"):
             task.append(user_add_task)
-            continue
+            print("Task Added")
+            if(len(task) > task_amount):
+                print("Task List full")
+                print(task)
+                break
+            else:
+                print("Task NOT FULL")
+                continue
         else:
-            print("MAX TASKS LIMIT REACHED / ADD TASK CANCELLED")
             print(task)
-            break
+    # while(len(task) <= task_amount):
+    #     user_ask = input("Would you like to add again? (y / n)? ").lower()
+    #     if(user_ask == "y"):
+    #         user_add_task = input("Please input another task: ")
+    #         task.append(user_add_task)
+    #         continue
+    #     else:
+    #         print(task)
+    #         break
+
+        # if(len(task) <= task_amount):
+            #     print("Task Added!")
+                # continue
+            # NESTED IF BREAK function start
+            # else:
+            #     # print("MAX TASKS LIMIT REACHED / ADD TASK CANCELLED")
+            #     print("Task Limits Exceeded")
+            #     break
+
     
 def update_task(): #Assume in here that "task" list is populated  #Updates Existing task(s)
     # this FUNCTION only OVERWRITTES BUT NEVER ADDS! 
@@ -37,12 +60,10 @@ def update_task(): #Assume in here that "task" list is populated  #Updates Exist
         task_update = input("Would you like to update your existing tasks? (y / n): ").lower()
         if(task_update == "y"):
             print("Here are your current tasks: ", task)
-            print("Which task do you want to update?")
-            
             while True:
-                user_update_task = input("Please Enter your task: ")
-                update_pos = int(input("Please Enter Position on which to Update task (0 - 4): "))
-                if(update_pos <= 5):
+                user_update_task = input("Please Enter your NEW task: ")
+                update_pos = int(input("Please Enter Position on which to Update task: "))
+                if(update_pos <= task_amount):
                     task[update_pos] = user_update_task
                     print(task)
 
@@ -55,16 +76,18 @@ def update_task(): #Assume in here that "task" list is populated  #Updates Exist
                         print("Here is your current task(s)", task)
                         break
                 else:
-                    print("Please Try again")
+                    print("Task Position exceeded")
                     continue 
-                 #     user_task_update_again = input("Please Enter NEW Task!: ")
-                    #     update_pos = int(input("Please Enter Position on which to Update task (0 - 4): "))
-                    #     if(update_pos <= 5):
-                    #         task[update_pos] = user_task_update_again
-                    #         print(task)
+        
+        # Instead of index style overwritting, just do the exact word method
         else:
             list_task()
             break
+
+
+            
+           
+        
 
 def list_task():
     print("Here are all of your tasks:")
@@ -75,8 +98,6 @@ def list_task():
 def completed_tasks():
     while True:
         user_task_done = input("Enter the task(s) you have completed: ")
-
-        # for x in task:
 
         if user_task_done in task:
             complete_task.append(user_task_done)
@@ -92,7 +113,7 @@ def completed_tasks():
         else:
             print("TASK WAS NOT FOUND PLEASE TRY AGAIN")
             continue
-        
+        # for x in task:
         #     if(x == user_task_done):
         #         
         #         ask_user = input("Eould you like to input another task? (y / n) ").lower()
@@ -103,6 +124,7 @@ def completed_tasks():
         #     else:
         #         print("THAT WAS NOT THE TASK ASSIGNED ON THE MAIN TASK LIST!")
         #         continue
+        
 def current_task(): # 2 tasks cannot be done simultaneously!
     # print(task)
     while True:
@@ -116,7 +138,7 @@ def current_task(): # 2 tasks cannot be done simultaneously!
             else:
                 break
         else:
-            print("That tasks does not assigned to you or it DOES NOT Exist")
+            print("That task does not assigned to you or it DOES NOT Exist")
             continue
             
 
