@@ -20,39 +20,19 @@ task.append(user_add_task)
 print("Task has been ADDED SUCCESSFULLY")
 
 def add_task():
-    while True:
-        user_add_task = input("Would you like to add some tasks? ")
+   while True:
+        user_add_task = input("Would you like to add some tasks? ").lower()
         if(user_add_task == "y"):
-            task.append(user_add_task)
+            add = input("Please ENTER TASKS: ")
+            task.append(add)
             print("Task Added")
-            if(len(task) > task_amount):
-                print("Task List full")
+            if(len(task) >= task_amount):
+                print("Task List Full")
                 print(task)
                 break
             else:
                 print("Task NOT FULL")
                 continue
-        else:
-            print(task)
-    # while(len(task) <= task_amount):
-    #     user_ask = input("Would you like to add again? (y / n)? ").lower()
-    #     if(user_ask == "y"):
-    #         user_add_task = input("Please input another task: ")
-    #         task.append(user_add_task)
-    #         continue
-    #     else:
-    #         print(task)
-    #         break
-
-        # if(len(task) <= task_amount):
-            #     print("Task Added!")
-                # continue
-            # NESTED IF BREAK function start
-            # else:
-            #     # print("MAX TASKS LIMIT REACHED / ADD TASK CANCELLED")
-            #     print("Task Limits Exceeded")
-            #     break
-
     
 def update_task(): #Assume in here that "task" list is populated  #Updates Existing task(s)
     # this FUNCTION only OVERWRITTES BUT NEVER ADDS! 
@@ -84,11 +64,6 @@ def update_task(): #Assume in here that "task" list is populated  #Updates Exist
             list_task()
             break
 
-
-            
-           
-        
-
 def list_task():
     print("Here are all of your tasks:")
     print(f"Task List {task}\n",
@@ -113,17 +88,6 @@ def completed_tasks():
         else:
             print("TASK WAS NOT FOUND PLEASE TRY AGAIN")
             continue
-        # for x in task:
-        #     if(x == user_task_done):
-        #         
-        #         ask_user = input("Eould you like to input another task? (y / n) ").lower()
-        #         if(ask_user == "y"):
-        #             continue
-        #         else:
-        #             print(complete_task)
-        #     else:
-        #         print("THAT WAS NOT THE TASK ASSIGNED ON THE MAIN TASK LIST!")
-        #         continue
         
 def current_task(): # 2 tasks cannot be done simultaneously!
     # print(task)
@@ -145,7 +109,7 @@ def current_task(): # 2 tasks cannot be done simultaneously!
 def delete_task(): 
     while True:
         del_task = input("What task you want to delete? ").lower()
-        if del_task in task: # FOR NOW IT CHECKS THE TASK LIST ONLY! #TODO: Impletement a line that can check both "In Progress and Task list"
+        if del_task in in_prog_task: # How TF am I suppose to check for both list?
             task.remove(del_task)
             print("TASK SELECTED HAS BEEN DELETED!")
             del_again = input("Would you like to Delete another task? (y/n) ").lower()
@@ -154,11 +118,8 @@ def delete_task():
             else:
                 break
         else:
-            print("Please Try again!")
+            print("Task was not found! Please Try again!")
             continue
-
-
-
 
 
 add_task()
